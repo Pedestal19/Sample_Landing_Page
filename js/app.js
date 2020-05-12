@@ -97,10 +97,9 @@ function bringActiveSectionToViewPort(){
         console.log('scroll is working');
         presentSection = sectionIsInViewPort();
         if (sectionIsInViewPort(presentSection)) {
-            presentSection.classList.add("your-active-class");
-          } else {
             deActivateSectionsNotInViewPort();
-          }
+            presentSection.classList.add("your-active-class");
+        } 
     });
 }
 
