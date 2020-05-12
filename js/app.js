@@ -38,10 +38,14 @@ const navMenu = document.querySelector('#navbar__list');
 
 // build the nav
 function creatNavMenu() {
+
+    const menuItemToCreate = 'li';
+    const menuItemClassName = 'menu__link';
+
     for (let currentItem of navMenuItems) {
-        let currentNavMenuItem = document.createElement('li');
+        let currentNavMenuItem = document.createElement(menuItemToCreate);
         //using html data set property to manipulate DomStringMap
-        currentNavMenuItem.className = 'menu__link';
+        currentNavMenuItem.className = menuItemClassName;
         currentNavMenuItem.dataset.nav = currentItem.id;
         currentNavMenuItem.innerText = currentItem.dataset.nav;
         navMenu.appendChild(currentNavMenuItem);
@@ -52,6 +56,16 @@ function creatNavMenu() {
 // Add class 'active' to section when near top of viewport
 
 // Scroll to anchor ID using scrollTO event
+function scrollToSection() {
+    
+    const designatedEvent = 'click';
+
+    navMenu.addEventListener(designatedEvent, function (event) {
+        const clickedSection = document.querySelector(`#${event.target.dataset.nav}`)
+        clickedSection.scrollIntoView();
+    });
+};
+
 
 
 
@@ -65,6 +79,6 @@ function creatNavMenu() {
 creatNavMenu();
 
 // Scroll to section on link click
-
+scrollToSection();
 // Set sections as active
 
