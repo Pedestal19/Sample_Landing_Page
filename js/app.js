@@ -54,10 +54,18 @@ function creatNavMenu() {
 };
 
 // Add class 'active' to section when near top of viewport
+function bringActiveSectionToViewPort(){
+
+    const designatedEvent = 'scroll';
+
+    window.addEventListener(designatedEvent, () => {
+        console.log('scroll is working');
+    });
+}
 
 // Scroll to anchor ID using scrollTO event
 function scrollToSection() {
-    
+
     const designatedEvent = 'click';
 
     navMenu.addEventListener(designatedEvent, function (event) {
@@ -80,5 +88,6 @@ creatNavMenu();
 
 // Scroll to section on link click
 scrollToSection();
-// Set sections as active
 
+// Set sections as active
+bringActiveSectionToViewPort();
