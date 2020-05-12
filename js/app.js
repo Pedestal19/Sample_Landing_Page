@@ -53,6 +53,7 @@ function sectionIsInViewBoundingBox(presentSection) {
     );
 };
 
+//deactivate element out of viewport
 function deActivateSectionsNotInViewPort() {
     for (let currentItem of navMenuItems) {
         if (currentItem.id != navMenuItems.id & currentItem.classList.contains('your-active-class')) {
@@ -98,7 +99,6 @@ function bringActiveSectionToViewPort(){
         if (sectionIsInViewPort(presentSection)) {
             presentSection.classList.add("your-active-class");
           } else {
-            //presentSection.classList.remove("your-active-class");
             deActivateSectionsNotInViewPort();
           }
     });
