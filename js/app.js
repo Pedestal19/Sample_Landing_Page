@@ -28,6 +28,40 @@ const navMenu = document.querySelector('#navbar__list');
 */
 
 // check which element is active
+function sectionIsInViewPort(){
+    //default value is first item
+    let selectedSection = navMenu[0];
+    for (let currentItem of navMenuItems) {
+        if(sectionIsInViewBoundingBox(currentItem)){
+            selectedSection = currentItem;
+        }
+    };
+
+    return selectedSection;
+}
+
+//getting height, width, top, bottom, right
+function sectionIsInViewBoundingBox(presentSection) {
+    //get bounding rectangle for section
+    const bounding = presentSection.getBoundingClientRect();
+    //returns true if in viewport
+    return (
+        bounding.top >= 0 &&
+        bounding.left >= 0 &&
+        bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        bounding.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+};
+
+function deActivateSectionsNotInViewPort() {
+    for (let currentItem of navMenuItems) {
+        if (currentItem.id != navMenuItems.id & currentItem.classList.contains('your-active-class')) {
+            currentItem.classList.remove('your-active-class');
+        }
+    }
+};
+
+
 
 
 /**
@@ -60,6 +94,13 @@ function bringActiveSectionToViewPort(){
 
     window.addEventListener(designatedEvent, () => {
         console.log('scroll is working');
+        presentSection = sectionIsInViewPort();
+        if (sectionIsInViewPort(presentSection)) {
+            presentSection.classList.add("your-active-class");
+          } else {
+            //presentSection.classList.remove("your-active-class");
+            deActivateSectionsNotInViewPort();
+          }
     });
 }
 
@@ -67,6 +108,8 @@ function bringActiveSectionToViewPort(){
 function scrollToSection() {
 
     const designatedEvent = 'click';
+
+    //add smooth scroll through style sheet to improve ux
 
     navMenu.addEventListener(designatedEvent, function (event) {
         const clickedSection = document.querySelector(`#${event.target.dataset.nav}`)
